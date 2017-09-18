@@ -24,7 +24,7 @@ EOF
   s.add_runtime_dependency 'yajl-ruby', '1.1.0'
   s.add_runtime_dependency 'swift', '1.0.1'
   # s.add_runtime_dependency 'swift-db-sqlite3', '0.1.2'
-  s.add_runtime_dependency 'swift-db-postgres', '0.3.1'
+  # s.add_runtime_dependency 'swift-db-postgres', '0.3.1'
   s.add_runtime_dependency 'haml', '3.1.6'
   s.add_runtime_dependency 'rdiscount', '1.6.8'
 
