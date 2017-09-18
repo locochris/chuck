@@ -3,7 +3,14 @@ require 'logger'
 require 'pathname'
 
 require 'swift/adapter/postgres'
-Swift.setup :default, Swift::Adapter::Postgres, db: 'chuck'
+
+if (database_url = ENV['DATABASE_URL'])
+  user, password, host, port, db = database_url.match(/^postgres:\/\/(.+?):(.+?)@(.+?):(.+?)\/(.+?)$/).captures
+  puts "user=#{user.inspect}, password=#{password.inspect}, host=#{host.inspect}, port=#{port.inspect} db=#{db.inspect}"
+  Swift.setup :default, Swift::Adapter::Postgres, db: db, user: user, password: password, host: host #, port: port
+else
+  Swift.setup :default, Swift::Adapter::Postgres, db: "chuck"
+end
 
 module Chuck
   class << self
