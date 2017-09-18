@@ -34,7 +34,15 @@ module Chuck
 
     def run
       db = options.delete(:db)
-      Swift.setup(:default, Swift::Adapter::Postgres, db: db)
+
+      # TODO DRY-up the two calls to Swift.setup
+      if (database_url = ENV['DATABASE_URL'])
+        user, password, host, port, db = database_url.match(/^postgres:\/\/(.+?):(.+?)@(.+?):(.+?)\/(.+?)$/).captures
+        puts "[bin/chuck] user=#{user.inspect}, password=#{password.inspect}, host=#{host.inspect}, port=#{port.inspect} db=#{db.inspect}"
+        Swift.setup :default, Swift::Adapter::Postgres, db: db, user: user, password: password, host: host #, port: port
+      else
+        Swift.setup :default, Swift::Adapter::Postgres, db: "chuck"
+      end
 
       begin
         Swift.db.execute("select * from sessions")
