@@ -10,6 +10,8 @@ require 'chuck'
 require 'chuck/server'
 require 'swift/migrations'
 
+require 'optparse'
+
 module Chuck
   class Cli
     def initialize
