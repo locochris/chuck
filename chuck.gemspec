@@ -14,6 +14,8 @@ EOF
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ["lib"]
 
+  s.executables = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+
   s.add_runtime_dependency 'eventmachine', '1.0.9.1'
   s.add_runtime_dependency 'em-websocket', '0.3.8'
   s.add_runtime_dependency 'em-http-request', '0.3.0'
