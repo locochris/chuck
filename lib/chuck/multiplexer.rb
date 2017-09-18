@@ -116,6 +116,7 @@ module Chuck
       return if @res_callback_done
       @res_callback_done = true
 
+puts @request # debugging NoMethodError: undefined method `host' for nil
       if callback = profile.callbacks[:response][@request.uri.host] || profile.callbacks[:response][nil]
         begin
           catch_halt {callback.call(response)}
