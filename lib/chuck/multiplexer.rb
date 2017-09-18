@@ -1,6 +1,6 @@
 require 'uri'
 require 'yajl'
-require 'cuuid/uuid'
+# require 'securerandom'
 require 'http-parser'
 require 'chuck/profile'
 require 'chuck/render'
