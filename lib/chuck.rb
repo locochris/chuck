@@ -2,6 +2,9 @@ require 'swift'
 require 'logger'
 require 'pathname'
 
+require 'swift/adapter/postgres'
+Swift.setup :default, Swift::Adapter::Postgres, db: 'chuck'
+
 module Chuck
   class << self
     def root

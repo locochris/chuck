@@ -5,7 +5,7 @@ $:.unshift File.dirname(__FILE__) + '/../lib'
 require 'bundler/setup'
 
 require 'swift'
-require 'swift/adapter/sqlite3'
+require 'swift/adapter/postgres'
 require 'chuck'
 require 'chuck/server'
 require 'swift/migrations'
@@ -13,7 +13,7 @@ require 'swift/migrations'
 module Chuck
   class Cli
     def initialize
-      @options = {db: ':memory:'}
+      @options = {db: 'chuck'}
     end
 
     def config op
@@ -32,7 +32,7 @@ module Chuck
 
     def run
       db = options.delete(:db)
-      Swift.setup(:default, Swift::Adapter::Sqlite3, db: db)
+      Swift.setup(:default, Swift::Adapter::Postgres, db: db)
 
       begin
         Swift.db.execute("select * from sessions")
